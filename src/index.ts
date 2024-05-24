@@ -11,7 +11,7 @@ export type Data_Format = {
 export type workerFunction = (d: Data_Format) => Promise<void>;
 
 export type Result_Format = {
-    id: string;
+    id: string; 
     result: any;
     success: boolean;
 };
@@ -64,6 +64,7 @@ export class QueueProcessor {
     }
 
     async addDataToBuffer(d: any): Promise<Result_Format> {
+        console.log(`adding data to buffer ${JSON.stringify(d)}`);
         const id = getUuid(new Date().getTime().toString() + String(d));
         this.data_buffer.push({ data_load: d, id: id });
         this.event_emitter.emit("data_added");
