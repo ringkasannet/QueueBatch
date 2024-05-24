@@ -1,6 +1,6 @@
 {
   "name": "@ringkasan.net/queuebatch",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A basic js queue that processes a batch number of data at a time",
   "main": "./dist/index.js",
   "types": "./src/index.ts",
