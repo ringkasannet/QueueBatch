@@ -24,12 +24,10 @@
   },
   "homepage": "https://github.com/ringkasannet/QueueBufferBatchProcessor#readme",
   "dependencies": {
-    "events": "^3.3.0",
-    "tsc": "^2.0.4",
     "uuid-by-string": "^4.0.0"
   },
   "devDependencies": {
-    "@types/events": "^3.0.3",
+    "@types/node": "^20.12.12",
     "typescript": "^5.4.5"
   }
 }

@@ -1,5 +1,5 @@
 
-import events from "events";
+import events from "node:events";
 import getUuid from 'uuid-by-string';
 
 
