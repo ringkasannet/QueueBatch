@@ -1,0 +1,33 @@
+{
+  "name": "queuebatch",
+  "version": "1.0.0",
+  "description": "A basic js queue that processes a batch number of data at a time",
+  "main": "/dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ringkasannet/QueueBufferBatchProcessor.git"
+  },
+  "keywords": [
+    "queue",
+    "batch",
+    "concurrency"
+  ],
+  "author": "ringkasannet",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ringkasannet/QueueBufferBatchProcessor/issues"
+  },
+  "homepage": "https://github.com/ringkasannet/QueueBufferBatchProcessor#readme",
+  "dependencies": {
+    "events": "^3.3.0",
+    "tsc": "^2.0.4",
+    "uuid-by-string": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/events": "^3.0.3",
+    "typescript": "^5.4.5"
+  }
+}
