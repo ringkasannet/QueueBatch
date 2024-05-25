@@ -55,7 +55,7 @@ class QueueProcessor {
                         active = false;
                         return;
                     }
-                    console.log(`in worker processor, ${f.name}, worker number: ${id}, processing ${JSON.stringify(dat)}`);
+                    // console.log(`in worker processor, ${f.name}, worker number: ${id}, processing ${JSON.stringify(dat)}`);
                     try {
                         const res = yield f(dat === null || dat === void 0 ? void 0 : dat.data_load);
                         this.data_storage.set(dat === null || dat === void 0 ? void 0 : dat.id, { id: dat === null || dat === void 0 ? void 0 : dat.id, result: res, success: true });
@@ -75,7 +75,7 @@ class QueueProcessor {
     }
     addDataToBuffer(d) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(`adding data to buffer ${JSON.stringify(d)}`);
+            // console.log(`adding data to buffer ${JSON.stringify(d)}`);
             const id = (0, uuid_by_string_1.default)(new Date().getTime().toString() + String(d));
             this.data_buffer.push({ data_load: d, id: id });
             this.event_emitter.emit("data_added");

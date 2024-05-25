@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ringkasannet/QueueBufferBatchProcessor.git"
+    "url": "git+https://github.com/ringkasannet/apitester.git"
   },
   "keywords": [
     "queue",

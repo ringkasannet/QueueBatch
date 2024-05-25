@@ -61,7 +61,7 @@ export class QueueProcessor {
                     active = false;
                     return;
                 }
-                console.log(`in worker processor, ${f.name}, worker number: ${id}, processing ${JSON.stringify(dat)}`);
+                // console.log(`in worker processor, ${f.name}, worker number: ${id}, processing ${JSON.stringify(dat)}`);
                 try {
                     const res = await f(dat?.data_load);
                     this.data_storage.set(dat?.id, { id: dat?.id, result: res, success: true });
@@ -79,7 +79,7 @@ export class QueueProcessor {
     }}
 
     async addDataToBuffer(d: any): Promise<Result_Format> {
-        console.log(`adding data to buffer ${JSON.stringify(d)}`);
+        // console.log(`adding data to buffer ${JSON.stringify(d)}`);
         const id = getUuid(new Date().getTime().toString() + String(d));
         this.data_buffer.push({ data_load: d, id: id });
         this.event_emitter.emit("data_added");
