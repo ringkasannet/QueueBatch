@@ -8,7 +8,7 @@ export type Data_Format = {
     data_load: any;
 };
 
-export type workerFunction = (d: Data_Format) => Promise<void>;
+export type workerFunction = (d: Data_Format) => Promise<any>;
 
 export type Result_Format = {
     id: string; 
@@ -20,19 +20,34 @@ export class QueueProcessor {
     data_buffer: Data_Format[];
     data_storage: Map<string, Result_Format>;
     counter = 0;
-    process_func: workerFunction;
+    // process_func: workerFunction;
     event_emitter = new events.EventEmitter();
+    processor_list= new Map<workerFunction, number>();
 
-    constructor(num_of_workers: number, process_func: workerFunction) {
+    constructor() {
         this.data_buffer = [];
         this.data_storage = new Map();
-        this.process_func = process_func;
+        // this.process_func = process_func;
+    }
+
+    addProcessor(f:workerFunction, num_of_workers: number){
         for (let i = 0; i < num_of_workers; i++) {
-            this.event_emitter.on("data_added", this.createProcessor(i));
+            this.event_emitter.on("data_added", this.createProcessor(f, i));            
+        }
+        this.processor_list.set(f, num_of_workers);
+    }
+
+    removeProcessor(f:workerFunction){
+        const num_of_workers = this.processor_list.get(f);
+        if(num_of_workers){
+            for (let i = 0; i < num_of_workers; i++) {
+                this.event_emitter.removeListener("data_added", f);
+            }
+            this.processor_list.delete(f);
         }
     }
 
-    createProcessor(id: number) {
+    createProcessor(f:workerFunction, id: number){ {
         let active = false;
         return async () => {
             if (active) {
@@ -46,9 +61,9 @@ export class QueueProcessor {
                     active = false;
                     return;
                 }
-                console.log(`in worker processor ${id}, processing ${JSON.stringify(dat)}`);
+                console.log(`in worker processor, ${f.name}, worker number: ${id}, processing ${JSON.stringify(dat)}`);
                 try {
-                    const res = await this.process_func(dat?.data_load);
+                    const res = await f(dat?.data_load);
                     this.data_storage.set(dat?.id, { id: dat?.id, result: res, success: true });
                     this.event_emitter.emit(dat.id);
                     // console.log(`worker ${id} finished processing ${JSON.stringify(dat)}, result: ${res}, storage: ${JSON.stringify(this.data_storage.get(dat.id))}`);
@@ -61,7 +76,7 @@ export class QueueProcessor {
             console.log(`worker ${id} finished processing`);
             active = false;
         };
-    }
+    }}
 
     async addDataToBuffer(d: any): Promise<Result_Format> {
         console.log(`adding data to buffer ${JSON.stringify(d)}`);
