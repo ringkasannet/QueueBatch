@@ -1,6 +1,6 @@
 {
   "name": "@ringkasan.net/queuebatch",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A basic js queue that processes a batch number of data at a time",
   "main": "./dist/index.js",
   "types": "./src/index.ts",
@@ -8,7 +8,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "watch-ts": "tsc -w"
-
   },
   "repository": {
     "type": "git",
