@@ -73,7 +73,7 @@ export class QueueProcessor {
                     this.event_emitter.emit(dat.id);
                 }
             }
-            console.log(`worker ${id} finished processing`);
+            // console.log(`worker ${id} finished processing`);
             active = false;
         };
     }}
